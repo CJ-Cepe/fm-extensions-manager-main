@@ -1,3 +1,16 @@
+import HeadBar from "./components/HeadBar";
+import MainContent from "./components/MainContent";
+
 export default function App() {
-  return <h1>Test</h1>;
+  return (
+    <>
+      <header>
+        <HeadBar />
+      </header>
+
+      <main>
+        <MainContent />
+      </main>
+    </>
+  );
 }
