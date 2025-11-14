@@ -1,7 +1,7 @@
 import ActiveSwitch from "./ActiveSwitch";
 
-export default function ExtensionCard({ data }) {
-  const { logo, name, description, isActive } = data;
+export default function ExtensionCard({ extDetails, onRemove, onSlider }) {
+  const { logo, name, description, isActive } = extDetails;
   return (
     <section>
       <div>
@@ -14,8 +14,13 @@ export default function ExtensionCard({ data }) {
       </div>
 
       <div>
-        <button>Remove</button>
-        <ActiveSwitch isactive={isActive}></ActiveSwitch>
+        <button onClick={() => onRemove(name)}>Remove</button>
+        <ActiveSwitch
+          status={isActive}
+          onClick={() => {
+            onSlider(name);
+          }}
+        ></ActiveSwitch>
       </div>
     </section>
   );
