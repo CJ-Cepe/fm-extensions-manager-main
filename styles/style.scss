@@ -1,0 +1,245 @@
+@use "./components/App";
+
+:root {
+  --neutral-900: hsl(227, 75%, 14%);
+  --neutral-800: hsl(226, 25%, 17%);
+  --neutral-700: hsl(225, 23%, 24%);
+  --neutral-600: hsl(226, 11%, 37%);
+  --neutral-300: hsl(0, 0%, 78%);
+  --neutral-200: hsl(217, 61%, 90%);
+  --neutral-100: hsl(0, 0%, 93%);
+  --neutral-0: hsl(200, 60%, 99%);
+
+  --red-400: hsl(3, 86%, 64%);
+  --red-500: hsl(3, 71%, 56%);
+  --red-700: hsl(3, 77%, 44%);
+
+  --gradient-light: linear-gradient(180deg, #ebf2fc 0%, #eef8f9 100%);
+  --gradient-dark: linear-gradient(180deg, #040918 0%, #091540 100%);
+
+  --bg-primary: var(--neutral-0);
+  /* --bg-secondary:
+  --bg-tertiary: 
+  --text-color: */
+
+  --bg-gradient: var(--gradient-light);
+  --text-color: var(--neutral-900);
+}
+
+// OS preference - dark
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg-gradient: var(var(--gradient-dark));
+  }
+}
+
+// manual Override
+.light-override {
+  /*  --bg-color: #ffffff !important;
+  --text-color: #1a1a1a !important; */
+}
+
+.dark-override {
+  /*  --bg-color: #1e1e1e !important;
+  --text-color: #f1f1f1 !important; */
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  outline: 1px solid red;
+}
+
+body {
+  background-color: var(--bg-gradient);
+  color: var(--text-color);
+  padding: 2.5rem;
+  font-family: "Noto Sans", sans-serif;
+
+  display: flex;
+  justify-content: center;
+
+  #root {
+    max-width: 1170px;
+    flex-grow: 1;
+  }
+}
+
+// ------------------
+.header {
+  &__inner {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.85rem 1rem;
+
+    border-radius: 1.3rem;
+    background-color: var(--bg-primary);
+  }
+
+  &__logo {
+    display: flex;
+  }
+
+  &__icon {
+    height: auto;
+    width: 100%;
+    display: block;
+  }
+
+  &__theme {
+    width: 3rem;
+    aspect-ratio: 1/1;
+    /* padding: 0.5rem; */
+    border-radius: 0.5rem;
+  }
+
+  &__theme-icon {
+    max-width: 100%;
+    height: auto;
+  }
+}
+
+// ------------------
+.main {
+  margin-top: 4rem;
+}
+
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  &__title {
+  }
+
+  &__filters {
+    display: flex;
+    gap: 0.9rem;
+  }
+
+  .filter {
+    padding: 0.4rem 1.25rem;
+    border-radius: 50px;
+    font-size: 1.2rem;
+    font-weight: 500;
+    font-family: inherit;
+    border: none;
+    letter-spacing: -0.4px;
+  }
+}
+
+.ext-grid {
+  padding: 2rem 0;
+
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+
+.ext-card {
+  padding: 1.3rem 1.3rem 1rem 1.3rem;
+  background-color: antiquewhite;
+  border-radius: 1rem;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  min-height: 200px;
+
+  // --------
+  &__header {
+    display: flex;
+
+    gap: 0.8rem;
+
+    justify-content: space-between;
+  }
+
+  &__icon {
+    max-width: 100%;
+    height: auto;
+    display: block;
+
+    align-self: flex-start;
+  }
+
+  &__info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+
+  &__name {
+    font-size: 1.25rem;
+    letter-spacing: -0.1px;
+  }
+
+  &__desc {
+    letter-spacing: -0.5px;
+  }
+  // --------
+  &__footer {
+    display: flex;
+    align-items: center;
+  }
+
+  &__btn {
+    font-family: inherit;
+    font-size: 1rem;
+    font-weight: 500;
+    padding: 0.4rem 0.8rem;
+    letter-spacing: -0.1px;
+    border-radius: 50px;
+    margin-right: auto;
+  }
+}
+
+.toggle {
+  position: relative;
+  display: inline-block;
+  width: 34px;
+  height: 19px;
+}
+
+.toggle__input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+
+  &:checked + .toggle_slider {
+    background-color: var(--red-700);
+  }
+
+  &:focus + .toggle_slider {
+    box-shadow: 0 0 1px var(--red-700);
+  }
+
+  &:checked + .toggle_slider:before {
+    -webkit-transform: translateX(15px);
+    -ms-transform: translateX(15px);
+    transform: translateX(15px);
+  }
+}
+
+.toggle_slider {
+  position: absolute;
+  cursor: pointer;
+  inset: 0;
+  background-color: var(--neutral-300);
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+  border-radius: 19px;
+
+  &:before {
+    position: absolute;
+    content: "";
+    height: 15px;
+    width: 15px;
+    left: 2px;
+    bottom: 2px;
+    background-color: var(--neutral-0);
+    -webkit-transition: 0.4s;
+    transition: 0.4s;
+    border-radius: 50%;
+  }
+}
