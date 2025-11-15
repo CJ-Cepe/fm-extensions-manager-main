@@ -35,10 +35,10 @@ export default function MainContent() {
 
   return (
     <>
-      <div>
-        <h1>Extensions List</h1>
+      <div className="page-header">
+        <h1 className="page-header__title">Extensions List</h1>
 
-        <div>
+        <div className="page-header__filters">
           <FilterButton
             onclick={handleFilterBtnClick}
             activeFilter={filterBtn}
@@ -57,7 +57,7 @@ export default function MainContent() {
         </div>
       </div>
 
-      <div>
+      <div className="ext-grid">
         {extensionList
           .filter((extension) => {
             if (filterBtn === "Active") {

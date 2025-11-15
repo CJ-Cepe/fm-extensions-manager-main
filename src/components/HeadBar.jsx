@@ -3,7 +3,7 @@ import Logo from "./Logo";
 
 export default function HeadBar() {
   return (
-    <div>
+    <div className="header__inner">
       <Logo />
       <ThemeSwitch />
     </div>

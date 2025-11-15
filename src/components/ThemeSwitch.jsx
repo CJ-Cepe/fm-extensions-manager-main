@@ -29,7 +29,11 @@ export default function ThemeSwitch() {
   };
 
   return (
-    <button aria-label="Toggle theme" onClick={toggleTheme}>
+    <button
+      aria-label="Toggle theme"
+      onClick={toggleTheme}
+      className="header__theme"
+    >
       <img
         src={theme === "light" ? iconMoon : iconSun}
         alt={
@@ -37,6 +41,7 @@ export default function ThemeSwitch() {
             ? "Moon icon for dark theme"
             : "Sun icon for light theme"
         }
+        className="header__theme-icon"
       />
     </button>
   );

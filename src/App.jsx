@@ -4,11 +4,11 @@ import MainContent from "./components/MainContent";
 export default function App() {
   return (
     <>
-      <header>
+      <header className="header">
         <HeadBar />
       </header>
 
-      <main>
+      <main className="main">
         <MainContent />
       </main>
     </>
