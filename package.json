@@ -7,8 +7,8 @@
     "dev:vite": "vite",
     "dev:scss": "sass --watch styles/style.scss:styles/style.css --no-source-map",
     "dev": "concurrently \"npm run dev:vite\" \"npm run dev:scss\"",
+    "build:scss": "sass styles/style.scss:styles/style.css --no-source-map",
     "build": "npm run build:scss && vite build",
-    "build:scss": "sass src/styles:src/styles --no-source-map",
     "preview": "vite preview"
   },
   "repository": {
