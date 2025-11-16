@@ -138,6 +138,7 @@ body {
   justify-content: center;
 
   min-height: 100vh;
+  min-width: 320px;
 
   @media screen and (max-width: 640px) {
     padding: 1rem;
