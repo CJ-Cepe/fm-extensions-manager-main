@@ -1,5 +1,5 @@
-import iconSun from "/assets/images/icon-sun.svg";
-import iconMoon from "/assets/images/icon-moon.svg";
+import iconSun from "/images/icon-sun.svg";
+import iconMoon from "/images/icon-moon.svg";
 import { useState, useEffect } from "react";
 
 const getInitialTheme = () => {
