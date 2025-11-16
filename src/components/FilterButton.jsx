@@ -1,7 +1,15 @@
+import { useEffect } from "react";
+
 export default function FilterButton({ onclick, activeFilter, value }) {
-  // if activeFilter change style filter--active
+  const isActive = activeFilter === value;
+  const btnClassName = `filter ${isActive ? "filter--active" : ""}`;
+
   return (
-    <button type="submit" onClick={() => onclick(value)} className="filter">
+    <button
+      type="submit"
+      onClick={() => onclick(value)}
+      className={btnClassName}
+    >
       {value}
     </button>
   );
