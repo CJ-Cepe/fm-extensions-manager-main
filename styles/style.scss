@@ -1,4 +1,82 @@
+@mixin light-theme {
+  --theme-background-default: var(--gradient-light);
+  --theme-text-primary: var(--neutral-900);
+
+  --theme-surface-raised: var(--neutral-0);
+
+  --theme-button-bg: var(--neutral-100);
+  --theme-button-bg-hover: var(--neutral-300);
+  --theme-button-bg-focus: var(--red-500);
+
+  --filter-button-bg: var(--neutral-0);
+  --filter-button-br: var(--neutral-100);
+  --filter-button-bg-hover: var(--neutral-100);
+  --filter-button-clr-hover: var(--neutral-600);
+  --filter-button-ol-focus: var(--red-700);
+  --filter-button-bg-active: var(--red-700);
+  --filter-button-bg-active-focus: var(--red-500);
+  --filter-button-clr-active: var(--neutral-0);
+
+  --remove-button-bg: var(--neutral-0);
+  --remove-button-br: var(--neutral-100);
+  --remove-button-clr: var(--neutral-900);
+  --remove-button-bg-hover: var(--red-700);
+  --remove-button-clr-hover: var(--neutral-0);
+  --remove-button-bg-focus: var(--neutral-100);
+  --remove-button-ol-focus: var(--red-500);
+
+  --slider-button-bg-on: var(--red-700);
+  --slider-button-bg-off: var(--neutral-300);
+  --slider-button-slider: var(--neutral-0);
+  --slider-button-bg-on-hover: var(--red-500);
+  --slider-button-ol-focus: var(--red-500);
+
+  --card-shadow: var(--shadow-light);
+  --card-dark-border: var(--neutral-0);
+
+  --logo-text-clr: var(--logo-text-light);
+}
+
+@mixin dark-theme {
+  --theme-background-default: var(--gradient-dark);
+  --theme-text-primary: var(--neutral-0);
+
+  --theme-surface-raised: var(--neutral-700);
+
+  --theme-button-bg: var(--neutral-800);
+  --theme-button-bg-hover: var(--neutral-600);
+  --theme-button-bg-focus: var(--red-500);
+
+  --filter-button-bg: var(--neutral-800);
+  --filter-button-br: var(--neutral-600);
+  --filter-button-bg-hover: var(--neutral-600);
+  --filter-button-clr-hover: var(--neutral-0);
+  --filter-button-ol-focus: var(--red-400);
+  --filter-button-bg-active: var(--red-400);
+  --filter-button-bg-active-focus: var(--red-500);
+  --filter-button-clr-active: var(--neutral-900);
+
+  --remove-button-bg: var(--neutral-800);
+  --remove-button-br: var(--neutral-600);
+  --remove-button-clr: var(--neutral-0);
+  --remove-button-bg-hover: var(--red-400);
+  --remove-button-clr-hover: var(--neutral-900);
+  --remove-button-bg-focus: var(--neutral-600);
+  --remove-button-ol-focus: var(--red-400);
+
+  --slider-button-bg-on: var(--red-400);
+  --slider-button-bg-off: var(--neutral-600);
+  --slider-button-slider: var(--neutral-0);
+  --slider-button-bg-on-hover: var(--red-500);
+  --slider-button-ol-focus: var(--red-400);
+
+  --card-dark-border: var(--neutral-600);
+
+  --logo-text-clr: var(--logo-text-dark);
+}
+
 :root {
+  // src of truth
   --neutral-900: hsl(227, 75%, 14%);
   --neutral-800: hsl(226, 25%, 17%);
   --neutral-700: hsl(225, 23%, 24%);
@@ -14,42 +92,28 @@
 
   --gradient-light: linear-gradient(180deg, #ebf2fc 0%, #eef8f9 100%);
   --gradient-dark: linear-gradient(180deg, #040918 0%, #091540 100%);
+  --shadow-light: 0 0 10px 1px rgba(0, 0, 0, 0.1);
+  --logo-text-light: var(--neutral-900);
+  --logo-text-dark: var(--neutral-0);
 
-  --bg-primary: var(--neutral-0);
-  --bg-secondary: var(--neutral-0);
-  --bg-tertiary: var(--neutral-100);
-
-  --bg-gradient: var(--gradient-light);
-  --border-primary: var(--neutral-300);
-  --text-color: var(--neutral-900);
-
-  --bg-secondary-hover: var(--red-700);
-  --text-color-hover: var(--neutral-0);
-  --border-color-hover: var(--red-700);
-
-  --outline-color-hover: var(--red-500);
-  --bg-color-inner-hover: var(--neutral-100);
-
-  --filter-bg-red-hover: var(--red-400);
-  --filter-bg-neutral-hover: var(--neutral-100);
-
-  --theme-bg-gray-hover: var(--neutral-300);
+  // theme dependent
+  @include light-theme;
 }
 
 // OS preference - dark
 @media (prefers-color-scheme: dark) {
   :root {
-    --bg-gradient: var(var(--gradient-dark));
+    @include dark-theme;
   }
 }
 
 // manual Override
 .light-override {
+  @include light-theme;
 }
 
 .dark-override {
-  /*  --bg-color: #1e1e1e !important;
-  --text-color: #f1f1f1 !important; */
+  @include dark-theme;
 }
 
 * {
@@ -65,13 +129,15 @@
 }
 
 body {
-  background-image: var(--bg-gradient);
-  color: var(--text-color);
+  background-image: var(--theme-background-default);
+  color: var(--theme-text-primary);
   font-family: "Noto Sans", sans-serif;
   padding: 2.5rem;
 
   display: flex;
   justify-content: center;
+
+  min-height: 100vh;
 
   @media screen and (max-width: 640px) {
     padding: 1rem;
@@ -85,6 +151,8 @@ body {
 
 button {
   cursor: pointer;
+  color: inherit;
+  font-family: inherit;
 }
 
 // ------------------
@@ -93,9 +161,9 @@ button {
     display: flex;
     justify-content: space-between;
     padding: 0.85rem 1rem;
-
     border-radius: 1.3rem;
-    background-color: var(--bg-primary);
+    background-color: var(--theme-surface-raised);
+    box-shadow: var(--card-shadow);
   }
 
   &__logo {
@@ -103,9 +171,11 @@ button {
   }
 
   &__icon {
-    height: auto;
-    width: 100%;
-    display: block;
+    color: var(--logo-text-clr);
+  }
+
+  &__icon-text {
+    fill: currentColor;
   }
 
   &__theme {
@@ -114,14 +184,14 @@ button {
     /* padding: 0.5rem; */
     border-radius: 0.5rem;
     border: none;
-    background-color: var(--bg-tertiary);
+    background-color: var(--theme-button-bg);
 
     &:hover {
-      background-color: var(--theme-bg-gray-hover);
+      background-color: var(--theme-button-bg-hover);
     }
 
     &:focus {
-      outline: 2px solid var(--outline-color-hover);
+      outline: 2px solid var(--theme-button-bg-focus);
     }
   }
 
@@ -169,16 +239,27 @@ button {
     font-family: inherit;
     border: none;
     letter-spacing: -0.4px;
-    background-color: var(--bg-primary);
-    outline: 1px solid var(--border-primary);
+
+    background-color: var(--filter-button-bg);
+    outline: 1px solid var(--filter-button-br);
 
     &:hover {
-      background-color: var(--filter-bg-neutral-hover);
+      background-color: var(--filter-button-bg-hover);
+      color: var(--filter-button-clr-hover);
     }
 
     &:focus {
-      outline: 2px solid var(--outline-color-hover);
+      outline: 2px solid var(--filter-button-ol-focus);
       outline-offset: 2px;
+    }
+
+    &.filter--active {
+      background-color: var(--filter-button-bg-active);
+      color: var(--filter-button-clr-active);
+
+      &:hover {
+        background-color: var(--filter-button-bg-active-focus);
+      }
     }
   }
 }
@@ -203,6 +284,10 @@ button {
   justify-content: space-between;
   min-height: 195px;
   max-width: 400px;
+  background-color: var(--theme-surface-raised);
+
+  box-shadow: var(--card-shadow);
+  border: 1px solid var(--card-dark-border);
 
   // --------
   &__header {
@@ -234,6 +319,7 @@ button {
 
   &__desc {
     letter-spacing: -0.5px;
+    font-weight: 400;
   }
   // --------
   &__footer {
@@ -249,20 +335,22 @@ button {
     letter-spacing: -0.1px;
     border-radius: 50px;
     margin-right: auto;
-    background-color: var(--bg-secondary);
-    border: 1px solid var(--border-primary);
 
-    &:hover {
-      background-color: var(--bg-secondary-hover);
-      color: var(--text-color-hover);
-      border: 1px solid var(--border-color-hover);
-    }
+    background-color: var(--remove-button-bg);
+    border: 1px solid var(--remove-button-br);
+    color: var(--remove-button-clr);
 
     &:focus {
       border: unset;
-      outline: 2px solid var(--border-color-hover);
+      outline: 2px solid var(--remove-button-ol-focus);
       outline-offset: 2px;
-      background-color: var(--bg-color-inner-hover);
+      background-color: var(--remove-button-bg-focus);
+    }
+
+    &:hover {
+      background-color: var(--remove-button-bg-hover);
+      color: var(--remove-button-clr-hover);
+      border: 1px solid var(--remove-button-bg-hover);
     }
   }
 }
@@ -280,11 +368,15 @@ button {
   height: 0;
 
   &:checked + .toggle_slider {
-    background-color: var(--red-700);
+    background-color: var(--slider-button-bg-on);
+  }
+
+  &:hover:checked + .toggle_slider {
+    background-color: var(--slider-button-bg-on-hover);
   }
 
   &:focus + .toggle_slider {
-    box-shadow: 0 0 1px var(--red-700);
+    box-shadow: 0 0 1px var(--slider-button-bg-on);
   }
 
   &:checked + .toggle_slider:before {
@@ -294,7 +386,7 @@ button {
   }
 
   &:focus + .toggle_slider {
-    outline: 2px solid var(--outline-color-hover);
+    outline: 2px solid var(--slider-button-ol-focus);
     outline-offset: 2px;
     transition: none;
     -webkit-transition: none;
@@ -305,7 +397,7 @@ button {
   position: absolute;
   cursor: pointer;
   inset: 0;
-  background-color: var(--neutral-300);
+  background-color: var(--slider-button-bg-off);
   -webkit-transition: 0.4s;
   transition: 0.4s;
   border-radius: 19px;
@@ -317,7 +409,7 @@ button {
     width: 15px;
     left: 2px;
     bottom: 2px;
-    background-color: var(--neutral-0);
+    background-color: var(--slider-button-slider);
     -webkit-transition: 0.4s;
     transition: 0.4s;
     border-radius: 50%;
